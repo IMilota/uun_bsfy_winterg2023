@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { Utils, createVisualComponent, useRoute, useState, DynamicLibraryComponent } from "uu5g05";
+import { Utils, createVisualComponent, DynamicLibraryComponent } from "uu5g05";
 import { withRoute } from "uu_plus4u5g02-app";
 
 import Config from "./config/config.js";
