@@ -46,7 +46,7 @@ let Hw1Design = createVisualComponent({
             value={{
               id: "c2268753689354bfea41fc7a9804f99e",
               author: "642-1-1",
-              name: "Diagram komponent",
+              name: "Detail nákupního seznamu",
               size: {
                 width: 1304,
                 height: 1304,
