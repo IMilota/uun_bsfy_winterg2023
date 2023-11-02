@@ -23,16 +23,16 @@ const MemberManager = createVisualComponent({
   //@@viewOff:defaultProps
 
   render(props) {
-    const { itemList, onChange, isOwner, ...restProps } = props;
+    const { data, onChange, isOwner, ...restProps } = props;
 
     const tempDataRef = useRef({});
 
     function addMember(key, value) {
       tempDataRef.current[key] = value;
       if (tempDataRef.current.id && tempDataRef.current.name) {
-        const newItemList = [...itemList];
-        newItemList.push(tempDataRef.current);
-        onChange(newItemList);
+        const newData = [...data];
+        newData.push(tempDataRef.current);
+        onChange(newData);
         tempDataRef.current = {};
       }
     }
@@ -40,15 +40,15 @@ const MemberManager = createVisualComponent({
     //@@viewOn:render
     return (
       <Uu5Elements.Modal header="Members" width={600} {...restProps}>
-        {itemList.map((item) => (
+        {data.map((item) => (
           <Member
             key={item.id}
             {...item}
-            onDelete={isOwner ? () => onChange(itemList.filter(({ id }) => id !== item.id)) : undefined}
+            onDelete={isOwner ? () => onChange(data.filter(({ id }) => id !== item.id)) : undefined}
           />
         ))}
         {isOwner && (
-          <Uu5Elements.ListItem significance="subdued" key={itemList.length}>
+          <Uu5Elements.ListItem significance="subdued" key={data.length}>
             <TextInput placeholder="id" onChange={(id) => addMember("id", id)} />
             <TextInput placeholder="name" onChange={(name) => addMember("name", name)} />
           </Uu5Elements.ListItem>

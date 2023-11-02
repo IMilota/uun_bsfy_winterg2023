@@ -141,7 +141,7 @@ const ShoppingListDetail = createVisualComponent({
         <MemberManager
           open={modalOpen}
           onClose={() => setModalOpen(false)}
-          itemList={memberList}
+          data={memberList}
           onChange={setMemberList}
           isOwner={isOwner}
         />
