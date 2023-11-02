@@ -1,0 +1,13 @@
+{
+  "uuSubAppDataStore": {
+    "primary": {
+      "type": "uuAppObjectStore",
+      "realization": "MongoDB",
+      "schemaMap": {
+        "bsfyWinterg2023": {
+          "realization": "dao/BsfyWinterg2023Mongo"
+        }
+      }
+    }
+  }
+}
