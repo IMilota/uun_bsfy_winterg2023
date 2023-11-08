@@ -7,6 +7,7 @@ import Plus4U5App from "uu_plus4u5g02-app";
 import Config from "./config/config.js";
 import Home from "../routes/home.js";
 import Hw1Design from "../routes/hw1-design.js";
+import TilesExample from "../routes/tiles-example.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -17,6 +18,7 @@ const ControlPanel = Utils.Component.lazy(() => import("../routes/control-panel.
 const ROUTE_MAP = {
   "": { redirect: "home" },
   home: (props) => <Home {...props} />,
+  tilesExample: (props) => <TilesExample {...props} />,
   hw1design: (props) => <Hw1Design {...props} />,
   about: (props) => <About {...props} />,
   "sys/uuAppWorkspace/initUve": (props) => <InitAppWorkspace {...props} />,
