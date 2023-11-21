@@ -1,6 +1,7 @@
 //@@viewOn:imports
 import { Utils, createVisualComponent, useState } from "uu5g05";
 import { withRoute } from "uu_plus4u5g02-app";
+import Uu5Elements from "uu5g05-elements";
 
 import Uu5Tiles from "uu5tilesg02";
 import Uu5TilesControls from "uu5tilesg02-controls";
@@ -14,80 +15,11 @@ import RouteBar from "../core/route-bar.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
-const DATA = [
-  {
-    id: "tygr01",
-    speciesName: "Bengal tiger",
-    speciesTaxonomyName: "Panthera tigris",
-    class: "Mammalia",
-    order: "Carnivora",
-    family: "Felidae",
-    location: "Asia",
-    description: "",
-    img: "tygr_01",
-  },
-  {
-    id: "pavian01",
-    speciesName: "Hamadryas baboon",
-    speciesTaxonomyName: "Papio hamadryas",
-    class: "Mammalia",
-    order: "Primates",
-    family: "Cercopithecidae",
-    location: "Africa",
-    description: "",
-    img: "pavian_01",
-  },
-  {
-    id: "malpa01",
-    speciesName: "Golden-bellied capuchin",
-    speciesTaxonomyName: "Sapajus xanthostemos",
-    class: "Mammalia",
-    order: "Primates",
-    family: "Cebidae",
-    location: "America",
-    description: "",
-    img: "malpa_01",
-  },
-  {
-    id: "langur01",
-    speciesName: "Red-shanked douc",
-    speciesTaxonomyName: "Pygathrix nemaeus",
-    class: "Mammalia",
-    order: "Primates",
-    family: "Cercopithecidae",
-    location: "Asia",
-    description: "",
-    img: "langur_01",
-  },
-  {
-    id: "orangutan01",
-    speciesName: "Sumatran orangutan",
-    speciesTaxonomyName: "Pongo abelii",
-    class: "Mammalia",
-    order: "Primates",
-    family: "Hominidae",
-    location: "Asia",
-    description: "",
-    img: "orangutan_01",
-  },
-  {
-    id: "varan02",
-    speciesName: "Komodo dragon",
-    speciesTaxonomyName: "Varanus komodoensis",
-    class: "Reptilia",
-    order: "Squamata",
-    family: "Varanidae",
-    location: "Asia",
-    description: "",
-    img: "varan_02",
-  },
-];
-
 const CLASS_LIST = [];
-for (let item of DATA) {
-  let itemClass = item.class;
-  if (CLASS_LIST.indexOf(itemClass) === -1) CLASS_LIST.push(itemClass);
-}
+// for (let item of DATA) {
+//   let itemClass = item.class;
+//   if (CLASS_LIST.indexOf(itemClass) === -1) CLASS_LIST.push(itemClass);
+// }
 
 const FILTER_LIST = [
   {
@@ -167,32 +99,63 @@ let TilesExample = createVisualComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-    const attrs = Utils.VisualComponent.getAttrs(props);
     return (
-      <div {...attrs}>
-        <RouteBar />
-        <div className={Config.Css.css({ padding: "16px 32px" })}>
-          <Uu5Tiles.ControllerProvider
-            data={DATA}
-            filterDefinitionList={FILTER_LIST}
-            filterList={filterList}
-            onFilterChange={onFilterChange}
-            sorterDefinitionList={SORTER_LIST}
-            sorterList={sorterList}
-            onSorterChange={onSorterChange}
-          >
-            <Uu5TilesControls.FilterButton />
-            <Uu5TilesControls.SorterButton />
-            <Uu5TilesControls.SearchButton />
-            <Uu5TilesControls.FilterBar initialExpanded />
-            <Uu5TilesControls.SorterBar initialExpanded />
-            <Uu5TilesControls.Counter />
-            <Uu5TilesElements.Grid tileMinWidth={100} tileMaxWidth={200}>
-              {Tile}
-            </Uu5TilesElements.Grid>
-          </Uu5Tiles.ControllerProvider>
-        </div>
-      </div>
+      <Uu5Tiles.ControllerProvider
+        data={props.animalDataList.data || []}
+        filterDefinitionList={FILTER_LIST}
+        filterList={filterList}
+        onFilterChange={onFilterChange}
+        sorterDefinitionList={SORTER_LIST}
+        sorterList={sorterList}
+        onSorterChange={onSorterChange}
+      >
+        <Uu5Elements.Block
+          card={"full"}
+          header={"Animal list"}
+          actionList={[
+            { component: <Uu5TilesControls.FilterButton /> },
+            { component: <Uu5TilesControls.SorterButton /> },
+            { component: <Uu5TilesControls.SearchButton /> },
+            { icon: "uugds-reload", onClick: props.animalDataList.handlerMap.load },
+          ]}
+          footer={<Uu5TilesControls.Counter />}
+          disabled={props.animalDataList.state.includes("pending")}
+        >
+          <Uu5TilesControls.FilterBar initialExpanded />
+          <Uu5TilesControls.SorterBar initialExpanded />
+          {props.animalDataList.state === "pendingNoData" && <Uu5Elements.Skeleton width="100%" height="200px" />}
+          {(props.animalDataList.state === "pending" || props.animalDataList.state.includes("ready")) && (
+            <div className={Config.Css.css({ position: "relative" })}>
+              <Uu5TilesElements.Grid tileMinWidth={100} tileMaxWidth={200}>
+                {Tile}
+              </Uu5TilesElements.Grid>
+              {props.animalDataList.state === "pending" && (
+                <div
+                  className={Config.Css.css({
+                    position: "absolute",
+                    top: "0",
+                    bottom: "0",
+                    right: "0",
+                    left: "0",
+                    opacity: "0.5",
+                    background: "grey",
+                    display: "flex",
+                    justifyContent: "center",
+                    alingItems: "center",
+                  })}
+                >
+                  <Uu5Elements.Pending />
+                </div>
+              )}
+            </div>
+          )}
+          {props.animalDataList.state.includes("error") && (
+            <Uu5Elements.HighlightedBox colorScheme="negative">
+              {props.animalDataList.errorData.toString()}
+            </Uu5Elements.HighlightedBox>
+          )}
+        </Uu5Elements.Block>
+      </Uu5Tiles.ControllerProvider>
     );
     //@@viewOff:render
   },

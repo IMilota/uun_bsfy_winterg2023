@@ -22,6 +22,8 @@ const Tile = createVisualComponent({
   render(props) {
     //@@viewOn:private
     let { data, ...otherProps } = props;
+
+    console.log(data);
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -34,8 +36,8 @@ const Tile = createVisualComponent({
           return (
             <>
               <img
-                src={`https://uuapp.plus4u.net/uu-webkit-maing02/1bdb540a0c53458aa20cfd9c179e6a1c/${data.img}`}
-                alt={data.img}
+                src={`https://uuapp.plus4u.net/uu-webkit-maing02/1bdb540a0c53458aa20cfd9c179e6a1c/${data.data.img}`}
+                alt={data.data.img}
                 className={Config.Css.css({ width: "100%", height: 120, display: "block", objectFit: "cover" })}
               />
               <div
@@ -48,22 +50,22 @@ const Tile = createVisualComponent({
               >
                 <div>
                   <Uu5Elements.Icon icon="uugds-favorites" />
-                  <strong>{data.speciesName}</strong>
+                  <strong>{data.data.speciesName}</strong>
                   <em>
-                    <small>({data.speciesTaxonomyName})</small>
+                    <small>({data.data.speciesTaxonomyName})</small>
                   </em>
                 </div>
                 <Uu5Elements.Text key="location" colorScheme="green">
                   <Uu5Elements.Icon icon="uugdsstencil-navigation-mapmarker-solid" />
-                  {data.location}
+                  {data.data.location}
                 </Uu5Elements.Text>
                 <div key="description"></div>
                 <small key="taxonomy">
                   <div>
                     Class{"\xA0"}
-                    <strong>{data.class}</strong>, Order{"\xA0"}
-                    <strong>{data.order}</strong>, Family{"\xA0"}
-                    <strong>{data.family}</strong>
+                    <strong>{data.data.class}</strong>, Order{"\xA0"}
+                    <strong>{data.data.order}</strong>, Family{"\xA0"}
+                    <strong>{data.data.family}</strong>
                   </div>
                 </small>
               </div>

@@ -8,6 +8,7 @@ import Config from "./config/config.js";
 import Home from "../routes/home.js";
 import Hw1Design from "../routes/hw1-design.js";
 import TilesExample from "../routes/tiles-example.js";
+import AnimalList from "../routes/animal-list.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -18,6 +19,7 @@ const ControlPanel = Utils.Component.lazy(() => import("../routes/control-panel.
 const ROUTE_MAP = {
   "": { redirect: "home" },
   home: (props) => <Home {...props} />,
+  animalList: (props) => <AnimalList {...props} />,
   tilesExample: (props) => <TilesExample {...props} />,
   hw1design: (props) => <Hw1Design {...props} />,
   about: (props) => <About {...props} />,

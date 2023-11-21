@@ -10,6 +10,7 @@ if (!appAssetsBaseUri.endsWith("/")) {
 
 Calls.call = (method, url, dtoIn) => {
   let mockUrl = (process.env.MOCK_DATA_BASE_URI || appAssetsBaseUri) + "mock/data/" + url + ".json";
+
   let responsePromise = (async () => {
     let response = await fetch(mockUrl);
     return await response.json();
