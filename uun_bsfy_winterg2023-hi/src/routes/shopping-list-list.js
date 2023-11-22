@@ -1,13 +1,12 @@
 //@@viewOn:imports
-import { Utils, createVisualComponent, useDataList } from "uu5g05";
+import { Utils, createVisualComponent } from "uu5g05";
 import { withRoute } from "uu_plus4u5g02-app";
 
-import Config from "./config/config.js";
 import PositionBar from "../core/position-bar.js";
 
-import TilesExample from "./tiles-example.js";
+import View from "../core/shopping-list-list/view.js";
 
-import Calls from "calls";
+import Config from "./config/config.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -19,9 +18,9 @@ import Calls from "calls";
 //@@viewOn:helpers
 //@@viewOff:helpers
 
-let AnimalList = createVisualComponent({
+let ShoppingListList = createVisualComponent({
   //@@viewOn:statics
-  uu5Tag: Config.TAG + "AnimalList",
+  uu5Tag: Config.TAG + "ShoppingListList",
   //@@viewOff:statics
 
   //@@viewOn:propTypes
@@ -34,7 +33,7 @@ let AnimalList = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    const animalDataList = useDataList({ handlerMap: { load: Calls.getAnimalList } });
+
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -46,7 +45,7 @@ let AnimalList = createVisualComponent({
       <div {...attrs}>
         <PositionBar />
         <div className={Config.Css.css({ padding: "16px 32px" })}>
-          <TilesExample animalDataList={animalDataList} />
+          <View />
         </div>
       </div>
     );
@@ -54,9 +53,9 @@ let AnimalList = createVisualComponent({
   },
 });
 
-AnimalList = withRoute(AnimalList, { authenticated: true });
+ShoppingListList = withRoute(ShoppingListList, { authenticated: true });
 
 //@@viewOn:exports
-export { AnimalList };
-export default AnimalList;
+export { ShoppingListList };
+export default ShoppingListList;
 //@@viewOff:exports

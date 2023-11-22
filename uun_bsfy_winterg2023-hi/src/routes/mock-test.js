@@ -30,7 +30,6 @@ let MockTest = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const [result, setResult] = useState({ state: "ready" });
-    console.log(result);
     //@@viewOff:private
 
     //@@viewOn:interface

@@ -2,14 +2,14 @@
 import { createVisualComponent, useRef } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Config from "../config/config.js";
-import Member from "./member";
-import TextInput from "./text-input";
+import Member from "../shopping-list-detail/member.js";
+import TextInput from "../shopping-list-detail/text-input.js";
 //@@viewOff:imports
 
 //@@viewOn:css
 //@@viewOff:css
 
-const MemberManager = createVisualComponent({
+const View = createVisualComponent({
   //@@viewOn:statics
   uu5Tag: Config.TAG + "TextInput",
   //@@viewOff:statics
@@ -60,6 +60,6 @@ const MemberManager = createVisualComponent({
 });
 
 //@@viewOn:exports
-export { MemberManager };
-export default MemberManager;
+export { View };
+export default View;
 //@@viewOff:exports

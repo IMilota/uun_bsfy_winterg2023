@@ -7,10 +7,10 @@ import Uu5Tiles from "uu5tilesg02";
 import Uu5TilesControls from "uu5tilesg02-controls";
 import Uu5TilesElements from "uu5tilesg02-elements";
 
-import Tile from "../bricks/tile.js";
+import Tile from "../core/shopping-list-list/tile.js";
 
 import Config from "./config/config.js";
-import RouteBar from "../core/route-bar.js";
+import PositionBar from "../core/position-bar.js";
 
 //@@viewOff:imports
 

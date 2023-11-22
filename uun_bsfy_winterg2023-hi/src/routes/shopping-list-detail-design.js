@@ -3,7 +3,7 @@ import { Utils, createVisualComponent, DynamicLibraryComponent } from "uu5g05";
 import { withRoute } from "uu_plus4u5g02-app";
 
 import Config from "./config/config.js";
-import RouteBar from "../core/route-bar.js";
+import PositionBar from "../core/position-bar.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -15,9 +15,9 @@ import RouteBar from "../core/route-bar.js";
 //@@viewOn:helpers
 //@@viewOff:helpers
 
-let Hw1Design = createVisualComponent({
+let ShoppingListDetailDesign = createVisualComponent({
   //@@viewOn:statics
-  uu5Tag: Config.TAG + "Hw1Design",
+  uu5Tag: Config.TAG + "ShoppingListDetailDesign",
   //@@viewOff:statics
 
   //@@viewOn:propTypes
@@ -39,7 +39,7 @@ let Hw1Design = createVisualComponent({
     const attrs = Utils.VisualComponent.getAttrs(props);
     return (
       <div {...attrs}>
-        <RouteBar />
+        <PositionBar />
         <div className={Config.Css.css({ padding: "16px 32px" })}>
           <DynamicLibraryComponent
             uu5Tag={"UuBml.Draw.Diagram"}
@@ -8608,9 +8608,9 @@ let Hw1Design = createVisualComponent({
   //@@viewOff:render
 });
 
-Hw1Design = withRoute(Hw1Design);
+ShoppingListDetailDesign = withRoute(ShoppingListDetailDesign);
 
 //@@viewOn:exports
-export { Hw1Design };
-export default Hw1Design;
+export { ShoppingListDetailDesign };
+export default ShoppingListDetailDesign;
 //@@viewOff:exports
