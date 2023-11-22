@@ -75,28 +75,26 @@ const ItemList = createVisualComponent({
             );
           }}
           headerType={"title"}
-          actionList={
-            isOwner
-              ? [
-                  {
-                    icon: shoppingListDetail.archived ? "uugds-lock-open" : "uugds-lock-closed",
-                    children: shoppingListDetail.archived ? "Otevřít" : "Uzavřít",
-                    onClick: () => handleToggleState(shoppingListDetail),
-                  },
-                  {
-                    icon: "uugds-delete",
-                    children: "Smazat",
-                    colorScheme: "negative",
-                    onClick: () => {
-                      handleDelete(shoppingListDetail);
-                      setRoute("shoppingListList");
-                    },
-                  },
-                  { component: <Uu5TilesControls.FilterButton /> },
-                  { component: <Uu5TilesControls.SearchButton /> },
-                ]
-              : undefined
-          }
+          actionList={[
+            {
+              icon: shoppingListDetail.archived ? "uugds-lock-open" : "uugds-lock-closed",
+              children: shoppingListDetail.archived ? "Otevřít" : "Uzavřít",
+              onClick: () => handleToggleState(shoppingListDetail),
+              hidden: !isOwner,
+            },
+            {
+              icon: "uugds-delete",
+              children: "Smazat",
+              colorScheme: "negative",
+              onClick: () => {
+                handleDelete(shoppingListDetail);
+                setRoute("shoppingListList");
+              },
+              hidden: !isOwner,
+            },
+            { component: <Uu5TilesControls.FilterButton /> },
+            { component: <Uu5TilesControls.SearchButton /> },
+          ]}
           headerSeparator={true}
           contentMaxHeight={"60vh"}
           footer={<Uu5TilesControls.Counter />}
@@ -191,6 +189,7 @@ function getHeaderInput({ style, shoppingListDetail, handleUpdate }) {
   return (
     <TextInput
       className={Config.Css.css(style)}
+      style={{ width: "50%" }}
       id={"header"}
       value={shoppingListDetail.name}
       onChange={(value) => handleUpdate({ ...shoppingListDetail, name: value })}
