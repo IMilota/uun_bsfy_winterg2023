@@ -9,6 +9,8 @@ import UserProvider from "./user-list/user-provider.js";
 import Config from "./config/config.js";
 import Home from "../routes/home.js";
 import ShoppingListListProvider from "./shopping-list-list/shopping-list-list-provider.js";
+import ThemeProvider from "./context-example/theme-provider.js";
+import LanguageProvider from "./context-example/language-provider.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -24,6 +26,7 @@ const ShoppingListDetailDesign = Utils.Component.lazy(() => import("../routes/sh
 
 // other examples
 const TilesExample = Utils.Component.lazy(() => import("../routes/tiles-example.js"));
+const ContextExample = Utils.Component.lazy(() => import("../routes/context-example.js"));
 const AnimalList = Utils.Component.lazy(() => import("../routes/animal-list.js"));
 
 const ROUTE_MAP = {
@@ -39,6 +42,7 @@ const ROUTE_MAP = {
   // other examples
   animalList: (props) => <AnimalList {...props} />,
   tilesExample: (props) => <TilesExample {...props} />,
+  contextExample: (props) => <ContextExample {...props} />,
 
   //
   about: (props) => <About {...props} />,
@@ -84,7 +88,11 @@ const Spa = createVisualComponent({
         <Uu5Elements.ModalBus>
           <UserProvider>
             <ShoppingListListProvider>
-              <Plus4U5App.Spa routeMap={ROUTE_MAP} />
+              <ThemeProvider>
+                <LanguageProvider initialLanguageList={["cs", "en"]}>
+                  <Plus4U5App.Spa routeMap={ROUTE_MAP} />
+                </LanguageProvider>
+              </ThemeProvider>
             </ShoppingListListProvider>
           </UserProvider>
         </Uu5Elements.ModalBus>
